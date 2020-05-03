@@ -1,0 +1,69 @@
+.sg-grid-element {
+    float: left;
+    padding: 10pt;
+    height: 35pt;
+    width: 100pt;
+    will-change: transform;
+    user-select: none;
+    cursor: pointer;
+    background-color: black;
+    border: solid 1pt grey;
+    position: relative;
+
+    .sge-title {
+        text-align: center;
+        font-size: 12pt;
+        font-weight: bolder;
+    }
+
+    .freq-note {
+        top: 0;
+        font-weight: bolder;
+        position: absolute;
+        font-size: 8pt;
+    }
+
+    .freq-start {
+        left: 5pt;
+    }
+
+    .freq-end {
+        right: 5pt;
+    }
+}
+
+.sg-grid-element.pause {
+    color: grey;
+}
+
+.sg-grid-element.selected {
+    border: solid 2pt lightgreen;
+}
+
+.sg-grid-element.w0 {
+    width: 80pt;
+}
+
+.sg-grid-element.w1 {
+    width: 90pt;
+}
+
+.sg-grid-element.w2 {
+    width: 100pt;
+}
+
+.sg-grid-element.w3 {
+    width: 150pt;
+}
+
+.sg-grid-element.w4 {
+    width: 180pt;
+}
+
+.sg-grid-element.w5 {
+    width: 200pt;
+}
+
+.sg-grid-element.w6 {
+    width: 220pt;
+}

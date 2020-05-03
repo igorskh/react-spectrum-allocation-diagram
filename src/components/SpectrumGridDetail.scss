@@ -1,0 +1,61 @@
+.sg-detail {
+    overflow: hidden;
+    position: relative;
+
+    .sg-detail-subgrid {
+        float: left;
+    }
+
+    .sg-detail-table {
+        float: left;
+        margin-left: 20pt;
+        table {
+            border-collapse: collapse;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid grey;
+        }
+
+        th,
+        td {
+            padding: 10pt;
+        }
+    }
+
+    .sg-detail-params {
+        clear: both;
+    }
+
+    .sg-subgrid {
+        clear: both;
+    }
+
+    .sg-subgrid-element {
+        background-color: black;
+        float: left;
+        padding: 5pt;
+        border: solid 1pt grey;
+        user-select: none;
+        cursor: pointer;
+    }
+
+    .sg-subgrid-element.selected {
+        border: solid 2pt lightgreen;
+    }
+
+    .sg-detail-param {
+        padding: 5pt;
+        float: left;
+        text-align: center;
+        border: solid 1pt grey;
+
+        h4 {
+            font-size: 12pt;
+            font-weight: bold;
+            border-bottom: solid 1pt grey;
+        }
+    }
+}
