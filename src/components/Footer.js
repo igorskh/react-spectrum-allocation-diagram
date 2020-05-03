@@ -20,7 +20,11 @@ function Footer() {
             </a>
             </li>
         </ol>
-        <p>&copy; 2020 Igor Kim</p>
+        <p>
+            &copy; 2020 Igor Kim
+            &nbsp;|&nbsp;
+            <a href="https://github.com/igorskh/react-spectrum-allocation-diagram">GitHub Repository</a>
+        </p>
     </div>;
 }
 
