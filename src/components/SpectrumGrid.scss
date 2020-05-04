@@ -1,6 +1,12 @@
+.sg-grid-container {
+    width: 100%;
+    overflow: scroll;
+}
+
 .sg-grid {
     clear: both;
-    overflow: hidden;
+    overflow: scroll;
+    width: 1100pt;
 }
 
 .drillisch {
