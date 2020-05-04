@@ -10,6 +10,10 @@
     min-width: 1000pt;
     cursor: pointer;
 
+    img {
+        height: 30pt;
+    }
+
     .spectrum-mini-map-loc {
         position: absolute;
         width: 30pt;
@@ -21,7 +25,6 @@
 
     .spectrum-mini-map-tile {
         font-size: 8pt;
-        height: 20pt;
         border: solid 1pt black;
     }
 }
