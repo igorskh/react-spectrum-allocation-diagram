@@ -14,6 +14,7 @@ const roundToEps = (v, eps) => {
 
 function SpectrumMap({
     id,
+    title,
     spectrumMap,
     path,
     onScroll,
@@ -83,6 +84,7 @@ function SpectrumMap({
     }, [spectrumMap, currentImg, span]);
 
     return <div style={{ position: "relative" }}>
+        <h2>{title}</h2>
         <SpectrumMiniMap
             minimapPath={minimapPath}
             onLocSelected={loc => canvas.current.scrollLeft = canvasWidth * loc}

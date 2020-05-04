@@ -7,28 +7,41 @@ import { DEFAULT_SPAN, BUCKET_PATH } from "../config";
 
 function SpectrumMapPage() {
     const [scrollValue, setScrollValue] = useState();
+    const maps = [
+        {
+            title: "Antenna VERT900",
+            id: "vert900",
+            span: DEFAULT_SPAN,
+            spectrumMap,
+            minimapPath: BUCKET_PATH + "/vert900/minimap.png",
+            path: BUCKET_PATH + "/vert900/waterfall",
+            onScroll: true
+        },
+        {
+            title: "Antenna VERT2450",
+            id: "vert2450",
+            span: DEFAULT_SPAN,
+            spectrumMap,
+            minimapPath: BUCKET_PATH + "/vert2450/minimap.png",
+            path: BUCKET_PATH + "/vert2450/waterfall",
+            scrollValue: true
+        }
+    ];
 
     return <>
         <h1>Spectrum Map</h1>
-
-        <h2>Antenna: VERT900</h2>
-        <SpectrumMap
-            id="vert900"
-            span={DEFAULT_SPAN}
-            onScroll={v => setScrollValue(v)}
-            spectrumMap={spectrumMap}
-            minimapPath={BUCKET_PATH + "/vert900/minimap.png"}
-            path={BUCKET_PATH + "/vert900/waterfall"}
-        />
-        <h2>Antenna: VERT2450</h2>
-        <SpectrumMap
-            id="vert2450"
-            span={DEFAULT_SPAN}
-            scrollValue={scrollValue}
-            spectrumMap={spectrumMap}
-            minimapPath={BUCKET_PATH + "/vert2450/minimap.png"}
-            path={BUCKET_PATH + "/vert2450/waterfall"}
-        />
+        {maps.map(e => {
+            return <SpectrumMap
+                id={e.id}
+                title={e.title}
+                span={e.span}
+                onScroll={v => e.onScroll ? setScrollValue(v) : null}
+                scrollValue={e.scrollValue ? scrollValue : null}
+                spectrumMap={e.spectrumMap}
+                minimapPath={e.minimapPath}
+                path={e.path}
+            />;
+        })}
     </>;
 }
 
