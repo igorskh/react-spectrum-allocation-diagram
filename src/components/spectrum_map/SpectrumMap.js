@@ -4,6 +4,7 @@ import "./SpectrumMap.scss";
 import SpectrumMiniMap from "./SpectrumMiniMap";
 import SpectrumTile from "./SpectrumTile";
 import SpectrumMapParams from "./SpectrumMapParams";
+import FirstImage from "./FirstImage";
 
 import { EPS } from "../../config";
 
@@ -102,29 +103,26 @@ function SpectrumMap({
                 }}
                 ref={canvas}
                 className="spectrum-map-canvas"
-                onScroll={(e) => setCurrentScroll(e.currentTarget.scrollLeft)}>
+                onScroll={(e) => setCurrentScroll(e.currentTarget.scrollLeft)}
+            >
                 <div className="spectrum-map"
                     style={{
                         width: canvasWidth
                     }}
                 >
-                    {canvasWidth === 0 &&
-                        <img
-                            onLoad={(e) => {
-                                setImgSize({
-                                    width: e.currentTarget.width,
-                                    height: e.currentTarget.height
-                                });
-                                setCanvasWidth(e.currentTarget.width * (spectrumMap.data.length + 1));
+                    {canvasWidth === 0
+                        ?
+                        <FirstImage
+                            onImageHasSize={s => {
+                                setImgSize(s);
+                                setCanvasWidth(s.width * (spectrumMap.data.length + 1));
                             }}
-                            alt="map_tile"
                             src={`${path}/${spectrumMap.data[0].prefix}.png`}
                         />
-                    }
-                    {imgSize && canvasWidth > 0 &&
+                        : imgSize &&
                         spectrumMap.data.map((e, i) => {
                             return <SpectrumTile
-                                show={i <= range[1] && i >= range[0]}
+                                show={i >= range[0] && i <= range[1]}
                                 imgSize={imgSize}
                                 key={e.start}
                                 path={path}
