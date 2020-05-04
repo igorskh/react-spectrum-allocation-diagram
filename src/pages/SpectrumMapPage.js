@@ -32,6 +32,7 @@ function SpectrumMapPage() {
         <h1>Spectrum Map</h1>
         {maps.map(e => {
             return <SpectrumMap
+                key={e.id}
                 id={e.id}
                 title={e.title}
                 span={e.span}
