@@ -99,7 +99,6 @@ function SpectrumMap({
         if (!spectrumMap) {
             return;
         }
-        console.log(currentImg);
         let startPos = spectrumMap.data[currentImg[0]].start;
         startPos += span * currentImg[1];
         setParams({
