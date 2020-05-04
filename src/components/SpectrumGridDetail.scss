@@ -3,12 +3,15 @@
     position: relative;
 
     .sg-detail-subgrid {
+        margin-top: 10pt;
+        margin-left: 10pt;
         float: left;
     }
 
     .sg-detail-table {
         float: left;
-        margin-left: 20pt;
+        margin-top: 10pt;
+        margin-left: 10pt;
         table {
             border-collapse: collapse;
         }
