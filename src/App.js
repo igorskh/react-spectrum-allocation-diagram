@@ -11,6 +11,8 @@ import NoMatch from "./pages/NoMatch";
 import Main from "./pages/Main";
 import SpectrumMapPage from "./pages/SpectrumMapPage";
 
+import Footer from "./components/Footer";
+
 function App() {
   return <Router>
     <Container fluid>
@@ -22,6 +24,8 @@ function App() {
           <Route path="*" component={NoMatch} status={404} />
         </Switch>
       )} />
+
+      <Footer />
     </Container>
   </Router>;
 }
