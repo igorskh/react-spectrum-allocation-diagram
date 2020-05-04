@@ -1,6 +1,7 @@
 import React from "react";
 
 import "./SpectrumGridDetail.scss";
+
 import BandsTable from "./detail_components/BandsTable";
 import SubGrid from "./detail_components/SubGrid";
 

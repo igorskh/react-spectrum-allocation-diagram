@@ -1,8 +1,8 @@
 import React from "react";
 
-import SpectrumGridElement from "./SpectrumGridElement";
-
 import "./SpectrumGrid.scss";
+
+import SpectrumGridElement from "./SpectrumGridElement";
 
 function SpectrumGrid({ data, onElementClick, selectedItemID }) {
     return <div className="sg-grid-container">

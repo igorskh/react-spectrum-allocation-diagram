@@ -5,7 +5,8 @@ import SpectrumMiniMap from "./SpectrumMiniMap";
 import SpectrumTile from "./SpectrumTile";
 import SpectrumMapParams from "./SpectrumMapParams";
 
-const EPS = 100;
+import { EPS } from "../../config";
+
 const roundToEps = (v, eps) => {
     return Math.round(v * eps) / eps;
 };

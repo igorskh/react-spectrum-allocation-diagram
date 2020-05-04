@@ -3,8 +3,7 @@ import React, { useState } from "react";
 import SpectrumMap from "../components/spectrum_map/SpectrumMap";
 import spectrumMap from "../data/spectrum_map.json";
 
-const DEFAULT_SPAN = 20;
-const BUCKET_PATH = "https://spectrum-map-tiles.s3.fr-par.scw.cloud";
+import { DEFAULT_SPAN, BUCKET_PATH } from "../config";
 
 function SpectrumMapPage() {
     const [scrollValue, setScrollValue] = useState();
@@ -27,6 +26,7 @@ function SpectrumMapPage() {
             span={DEFAULT_SPAN}
             scrollValue={scrollValue}
             spectrumMap={spectrumMap}
+            minimapPath={BUCKET_PATH + "/vert2450/minimap.png"}
             path={BUCKET_PATH + "/vert2450/waterfall"}
         />
     </>;
