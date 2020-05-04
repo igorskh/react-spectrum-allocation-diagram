@@ -1,75 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import { Spinner } from "react-bootstrap";
-
 import "./SpectrumMap.scss";
+import SpectrumMiniMap from "./SpectrumMiniMap";
+import SpectrumTile from "./SpectrumTile";
+import SpectrumMapParams from "./SpectrumMapParams";
 
-const eps = 100;
-
-function SpectrumTile({ path, data, imgSize, show }) {
-    const [loading, setLoading] = useState(true);
-
-    return <div style={{
-        float: "left",
-        position: "relative",
-        overflowY: "hidden",
-        width: imgSize.width,
-        height: imgSize.height
-    }}>
-        {show && <>
-            <div style={{
-                left: 0
-            }}
-                className="freq-marker">
-                {data.start} MHz
-                </div>
-
-            <div style={{
-                left: imgSize.width / 2
-            }}
-                className="freq-marker">
-                {data.cf} MHz
-                </div>
-            <img
-                onLoad={() => setLoading(false)}
-                style={{ display: loading ? "none" : "" }}
-                alt="map_tile"
-                src={`${path}/${data.prefix}.png`}
-            />
-        </>
-        }
-        {show && loading && <Spinner animation="border" size="lg">
-            <span className="sr-only">
-                Loading...
-            </span>
-        </Spinner>
-        }
-
-    </div >;
-}
-
-function SpectrumMiniMap({ currentLoc, minimapPath, onLocSelected, miniMapCanvasRef }) {
-    const miniMapRef = useRef();
-    const [loc, setLoc] = useState(0);
-
-    useEffect(() => {
-        setLoc(miniMapRef.current.offsetWidth * currentLoc);
-    }, [currentLoc]);
-
-    return <div
-        onClick={e => onLocSelected((e.clientX + miniMapCanvasRef.current.scrollLeft - 40) / miniMapRef.current.offsetWidth)}
-        ref={miniMapCanvasRef} className="spectrum-mini-map">
-        <div
-            style={{
-                left: loc
-            }}
-            className="spectrum-mini-map-loc"></div>
-        <img
-            ref={miniMapRef}
-            alt="minimap"
-            src={minimapPath} />
-    </div>;
-}
+const EPS = 100;
+const roundToEps = (v, eps) => {
+    return Math.round(v * eps) / eps;
+};
 
 function SpectrumMap({
     id,
@@ -140,9 +79,9 @@ function SpectrumMap({
         let startPos = spectrumMap.data[currentImg[0]].start;
         startPos += span * currentImg[1];
         setParams({
-            start: Math.round(startPos * eps) / eps,
-            stop: Math.round((startPos + span) * eps) / eps,
-            cf: Math.round((startPos + span / 2) * eps) / eps
+            start: roundToEps(startPos, EPS),
+            stop: roundToEps(startPos + span, EPS),
+            cf: roundToEps(startPos + span / 2, EPS)
         });
     }, [spectrumMap, currentImg, span]);
 
@@ -162,40 +101,16 @@ function SpectrumMap({
             position: "relative"
         }}>
             {imgSize && params &&
-                <div>
-                    <div style={{
-                        width: imgSize.width,
-                        height: imgSize.height + 40
-                    }}
-                        className="spectrum-map-window">
-                        <div className="spectrum-params">
-                            <span>
-                                Span {span} MHz
-                    </span>
-                            <span>
-                                Start {params.start} MHz
-                    </span>
-                            <span>
-                                CF {params.cf} MHz
-                    </span>
-                            <span>
-                                Stop {params.stop} MHz
-                    </span>
-                        </div>
-                    </div>
-
-                    <div className="right-border" style={{
-                        left: imgSize.width,
-                        height: imgSize.height + 40
-                    }}>
-                    </div>
-                </div>
+                <SpectrumMapParams
+                    imgSize={imgSize}
+                    params={params}
+                    span={span} />
             }
             <div
-                ref={canvas}
                 style={{
                     minWidth: imgSize ? imgSize.width : ""
                 }}
+                ref={canvas}
                 className="spectrum-map-canvas"
                 onScroll={(e) => setCurrentScroll(e.currentTarget.scrollLeft)}>
                 <div className="spectrum-map"
