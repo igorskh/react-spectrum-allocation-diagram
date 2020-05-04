@@ -39,22 +39,54 @@ function SpectrumTile({ path, data, imgSize, show }) {
         </>
         }
         {show && loading && <Spinner animation="border" size="lg">
-            <span className="sr-only">Loading...</span>
+            <span className="sr-only">
+                Loading...
+            </span>
         </Spinner>
         }
 
     </div >;
 }
 
+function SpectrumMiniMap({ currentLoc, minimapPath, onLocSelected, miniMapCanvasRef }) {
+    const miniMapRef = useRef();
+    const [loc, setLoc] = useState(0);
+
+    useEffect(() => {
+        setLoc(miniMapRef.current.offsetWidth * currentLoc);
+    }, [currentLoc]);
+
+    return <div
+        onClick={e => onLocSelected((e.clientX + miniMapCanvasRef.current.scrollLeft - 40) / miniMapRef.current.offsetWidth)}
+        ref={miniMapCanvasRef} className="spectrum-mini-map">
+        <div
+            style={{
+                left: loc
+            }}
+            className="spectrum-mini-map-loc"></div>
+        <img
+            ref={miniMapRef}
+            alt="minimap"
+            src={minimapPath} />
+    </div>;
+}
+
 function SpectrumMap({
-    id, spectrumMap, path, onScroll, scrollValue, span
+    id,
+    spectrumMap,
+    path,
+    onScroll,
+    scrollValue,
+    span,
+    minimapPath
 }) {
     const firstImage = useRef();
     const canvas = useRef();
-    const [currentImg, setCurrentImg] = useState([0, 0.0]);
+    const [currentImg, setCurrentImg] = useState([0, 0.0, 0.0]);
     const [imgSize, setImgSize] = useState();
     const [canvasWidth, setCanvasWidth] = useState(0);
     const [currentScroll, setCurrentScroll] = useState(0);
+    const miniMapCanvasRef = useRef();
     const [range, setRange] = useState([0, 0]);
     const [params, setParams] = useState();
 
@@ -79,9 +111,11 @@ function SpectrumMap({
         if (onScroll) {
             onScroll(currentScroll);
         }
+
         if (!canvasWidth || !imgSize) {
             return;
         }
+
         const canvasCurrentWidth = canvas.current.offsetWidth;
         const nOffset = Math.round(currentScroll / canvasCurrentWidth);
         const imgPerCanvas = Math.ceil(canvasCurrentWidth / imgSize.width);
@@ -91,7 +125,11 @@ function SpectrumMap({
         const imgID = focusedImgPos > 0 ? Math.floor(focusedImgPos) : 0;
         const pos = focusedImgPos % 1;
 
-        setCurrentImg([imgID, pos >= 0 ? pos : 0]);
+        setCurrentImg([
+            imgID,
+            pos >= 0 ? pos : 0,
+            currentScroll > 0 ? currentScroll / canvasWidth : 0.0
+        ]);
         setRange([nHide, (nOffset + 1) * imgPerCanvas]);
     }, [spectrumMap, canvasWidth, currentScroll, onScroll, canvas, imgSize, id]);
 
@@ -109,71 +147,88 @@ function SpectrumMap({
     }, [spectrumMap, currentImg, span]);
 
     return <div style={{ position: "relative" }}>
+        {minimapPath &&
+            <div
+                ref={miniMapCanvasRef}
+                className="spectrum-mini-map-canvas">
+                <SpectrumMiniMap
+                    miniMapCanvasRef={miniMapCanvasRef}
+                    onLocSelected={loc => canvas.current.scrollLeft = canvasWidth * loc}
+                    minimapPath={minimapPath}
+                    currentLoc={currentImg[2]}
+                />
+            </div>}
+        <div style={{
+            position: "relative"
+        }}>
+            {imgSize && params &&
+                <div>
+                    <div style={{
+                        width: imgSize.width,
+                        height: imgSize.height + 40
+                    }}
+                        className="spectrum-map-window">
+                        <div className="spectrum-params">
+                            <span>
+                                Span {span} MHz
+                    </span>
+                            <span>
+                                Start {params.start} MHz
+                    </span>
+                            <span>
+                                CF {params.cf} MHz
+                    </span>
+                            <span>
+                                Stop {params.stop} MHz
+                    </span>
+                        </div>
+                    </div>
 
-        {imgSize && params &&
-            <>
-                <div style={{
-                    width: imgSize.width,
-                    height: imgSize.height + 40
-                }}
-                    className="spectrum-map-window">
-                    <div className="spectrum-params">
-                        <span>
-                            Span {span} MHz
-                    </span>
-                        <span>
-                            Start {params.start} MHz
-                    </span>
-                        <span>
-                            CF {params.cf} MHz
-                    </span>
-                        <span>
-                            Stop {params.stop} MHz
-                    </span>
+                    <div className="right-border" style={{
+                        left: imgSize.width,
+                        height: imgSize.height + 40
+                    }}>
                     </div>
                 </div>
-
-                <div className="right-border" style={{
-                    left: imgSize.width,
-                    height: imgSize.height + 40
-                }}>
-                </div>
-            </>
-        }
-        <div
-            ref={canvas}
-            className="spectrum-map-canvas"
-            onScroll={(e) => setCurrentScroll(e.currentTarget.scrollLeft)}>
-            <div className="spectrum-map"
+            }
+            <div
+                ref={canvas}
                 style={{
-                    width: canvasWidth
+                    minWidth: imgSize ? imgSize.width : ""
                 }}
-            >
-                {canvasWidth === 0 &&
-                    <img
-                        onLoad={(e) => {
-                            setImgSize({
-                                width: e.currentTarget.width,
-                                height: e.currentTarget.height
-                            });
-                            setCanvasWidth(e.currentTarget.width * (spectrumMap.data.length + 1));
-                        }}
-                        ref={firstImage}
-                        alt="map_tile"
-                        src={`${path}/${spectrumMap.data[0].prefix}.png`}
-                    />
-                }
-                {imgSize && canvasWidth > 0 &&
-                    spectrumMap.data.map((e, i) => {
-                        return <SpectrumTile
-                            show={i <= range[1] && i >= range[0]}
-                            imgSize={imgSize}
-                            key={e.start}
-                            path={path}
-                            data={e}
-                        />;
-                    })
-                }
+                className="spectrum-map-canvas"
+                onScroll={(e) => setCurrentScroll(e.currentTarget.scrollLeft)}>
+                <div className="spectrum-map"
+                    style={{
+                        width: canvasWidth
+                    }}
+                >
+                    {canvasWidth === 0 &&
+                        <img
+                            onLoad={(e) => {
+                                setImgSize({
+                                    width: e.currentTarget.width,
+                                    height: e.currentTarget.height
+                                });
+                                setCanvasWidth(e.currentTarget.width * (spectrumMap.data.length + 1));
+                            }}
+                            ref={firstImage}
+                            alt="map_tile"
+                            src={`${path}/${spectrumMap.data[0].prefix}.png`}
+                        />
+                    }
+                    {imgSize && canvasWidth > 0 &&
+                        spectrumMap.data.map((e, i) => {
+                            return <SpectrumTile
+                                show={i <= range[1] && i >= range[0]}
+                                imgSize={imgSize}
+                                key={e.start}
+                                path={path}
+                                data={e}
+                            />;
+                        })
+                    }
+                </div>
             </div>
         </div>
     </div>;

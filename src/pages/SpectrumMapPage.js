@@ -18,6 +18,7 @@ function SpectrumMapPage() {
             span={DEFAULT_SPAN}
             onScroll={v => setScrollValue(v)}
             spectrumMap={spectrumMap}
+            minimapPath={BUCKET_PATH + "/vert900/minimap.png"}
             path={BUCKET_PATH + "/vert900/waterfall"}
         />
         <h2>Antenna: VERT2450</h2>

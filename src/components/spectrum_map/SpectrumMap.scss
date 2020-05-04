@@ -10,7 +10,7 @@
 .spectrum-map {
     img {
         object-fit: cover;
-        object-position: 20% 15pt; 
+        object-position: 20% 15pt;
         cursor: pointer;
     }
     .spinner-border {
@@ -28,11 +28,11 @@
 }
 
 .right-border {
+    top: 5pt;
     position: absolute;
     width: 3pt;
     background-color: white;
     z-index: 20;
-    top: 5pt;
     margin-left: -11pt;
 }
 
@@ -49,4 +49,35 @@
     span {
         margin-right: 20pt;
     }
+}
+
+.spectrum-mini-map-canvas {
+    width: 100%;
+    position: relative;
+    overflow-x: scroll;
+    z-index: 10;
+}
+
+.spectrum-mini-map {
+    width: 100%;
+    min-width: 1000pt;
+
+    .spectrum-mini-map-loc {
+        position: absolute;
+        width: 45pt;
+        top: 0;
+        opacity: .5;
+        background-color: white;
+        height: 100%;
+    }
+
+    .spectrum-mini-map-tile {
+        font-size: 8pt;
+        height: 20pt;
+        border: solid 1pt black;
+    }
+}
+
+.spectrum-mini-map::-webkit-scrollbar {
+    display: none;
 }
