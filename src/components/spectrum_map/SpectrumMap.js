@@ -25,7 +25,6 @@ function SpectrumMap({
     const [imgSize, setImgSize] = useState();
     const [canvasWidth, setCanvasWidth] = useState(0);
     const [currentScroll, setCurrentScroll] = useState(0);
-    const miniMapCanvasRef = useRef();
     const [range, setRange] = useState([0, 0]);
     const [params, setParams] = useState();
 
@@ -86,17 +85,11 @@ function SpectrumMap({
     }, [spectrumMap, currentImg, span]);
 
     return <div style={{ position: "relative" }}>
-        {minimapPath &&
-            <div
-                ref={miniMapCanvasRef}
-                className="spectrum-mini-map-canvas">
-                <SpectrumMiniMap
-                    miniMapCanvasRef={miniMapCanvasRef}
-                    onLocSelected={loc => canvas.current.scrollLeft = canvasWidth * loc}
-                    minimapPath={minimapPath}
-                    currentLoc={currentImg[2]}
-                />
-            </div>}
+        <SpectrumMiniMap
+            minimapPath={minimapPath}
+            onLocSelected={loc => canvas.current.scrollLeft = canvasWidth * loc}
+            currentLoc={currentImg[2]}
+        />
         <div style={{
             position: "relative"
         }}>

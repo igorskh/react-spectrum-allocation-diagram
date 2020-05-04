@@ -50,36 +50,3 @@
         margin-right: 20pt;
     }
 }
-
-.spectrum-mini-map-canvas {
-    width: 100%;
-    position: relative;
-    overflow-x: scroll;
-    z-index: 10;
-}
-
-.spectrum-mini-map {
-    width: 100%;
-    min-width: 1000pt;
-    cursor: pointer;
-
-    .spectrum-mini-map-loc {
-        position: absolute;
-        width: 30pt;
-        top: 0;
-        margin-left: -10pt;
-        opacity: .5;
-        background-color: white;
-        height: 100%;
-    }
-
-    .spectrum-mini-map-tile {
-        font-size: 8pt;
-        height: 20pt;
-        border: solid 1pt black;
-    }
-}
-
-.spectrum-mini-map::-webkit-scrollbar {
-    display: none;
-}
