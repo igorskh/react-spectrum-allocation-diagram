@@ -64,8 +64,9 @@
 
     .spectrum-mini-map-loc {
         position: absolute;
-        width: 45pt;
+        width: 30pt;
         top: 0;
+        margin-left: -10pt;
         opacity: .5;
         background-color: white;
         height: 100%;
