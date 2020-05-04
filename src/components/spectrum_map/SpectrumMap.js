@@ -19,7 +19,6 @@ function SpectrumMap({
     span,
     minimapPath
 }) {
-    const firstImage = useRef();
     const canvas = useRef();
     const [currentImg, setCurrentImg] = useState([0, 0.0, 0.0]);
     const [imgSize, setImgSize] = useState();
@@ -27,9 +26,6 @@ function SpectrumMap({
     const [currentScroll, setCurrentScroll] = useState(0);
     const [range, setRange] = useState([0, 0]);
     const [params, setParams] = useState();
-
-    useEffect(() => {
-    }, [spectrumMap, firstImage]);
 
     useEffect(() => {
         if (typeof (scrollValue) !== "undefined") {
@@ -120,7 +116,6 @@ function SpectrumMap({
                                 });
                                 setCanvasWidth(e.currentTarget.width * (spectrumMap.data.length + 1));
                             }}
-                            ref={firstImage}
                             alt="map_tile"
                             src={`${path}/${spectrumMap.data[0].prefix}.png`}
                         />
