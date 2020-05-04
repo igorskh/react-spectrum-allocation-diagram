@@ -1,0 +1,52 @@
+.spectrum-map-canvas {
+    padding-top: 25pt;
+    width: 100%;
+    position: relative;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    z-index: 10;
+}
+
+.spectrum-map {
+    img {
+        object-fit: cover;
+        object-position: 20% 15pt; 
+        cursor: pointer;
+    }
+    .spinner-border {
+        margin-top: 15%;
+        margin-left: 45%;
+    }
+}
+
+.freq-marker {
+    position: absolute;
+    font-weight: bolder;
+    padding: 5pt;
+    top: 15pt;
+    background-color: black;
+}
+
+.right-border {
+    position: absolute;
+    width: 3pt;
+    background-color: white;
+    z-index: 20;
+    top: 5pt;
+    margin-left: -11pt;
+}
+
+.spectrum-map-window {
+    top: 5pt;
+    border: solid 2pt white;
+    padding: 10pt;
+    padding-top: 2pt;
+    margin-left: -8pt;
+    position: absolute;
+    z-index: 1;
+    background-color: none;
+
+    span {
+        margin-right: 20pt;
+    }
+}
