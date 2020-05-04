@@ -18,7 +18,7 @@ function SpectrumMapParams({ imgSize, span, params }) {
                     Start {params.start} MHz
                 </span>
                 <span>
-                    CF {params.cf} MHz
+                    Center {params.cf} MHz
                 </span>
                 <span>
                     Stop {params.stop} MHz
