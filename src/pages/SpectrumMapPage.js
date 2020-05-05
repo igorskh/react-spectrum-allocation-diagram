@@ -36,7 +36,7 @@ function SpectrumMapPage() {
     ];
 
     return <>
-        <h1>Spectrum Map</h1>
+        <h1>Spectrum Measurements</h1>
         {maps.map(e => {
             return <SpectrumMap
                 key={e.id}
