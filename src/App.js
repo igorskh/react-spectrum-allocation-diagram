@@ -11,12 +11,13 @@ import NoMatch from "./pages/NoMatch";
 import Main from "./pages/Main";
 import SpectrumMapPage from "./pages/SpectrumMapPage";
 
+import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 function App() {
   return <Router>
+    <Header />
     <Container fluid>
-
       <Route render={({ location }) => (
         <Switch location={location}>
           <Route exact={true} path="/" component={Main} />
