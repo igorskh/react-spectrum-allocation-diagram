@@ -8,7 +8,7 @@ function Main() {
     const [elementID, setElementID] = useState();
 
     return <>
-        <h1>Interactive Germany Spectrum Allocation Diagram</h1>
+        <h1>Spectrum Allocation in Germany</h1>
         <SpectrumGrid
             onElementClick={(id) => setElementID(id)}
             selectedItemID={elementID}
