@@ -2,7 +2,7 @@ import React from "react";
 
 import "./SpectrumGridElement.scss";
 
-const BREAK_POINTS = [5, 10, 20, 50, 100, 200];
+import { BREAK_POINTS } from "../config";
 
 const SpectrumGridElement = ({ id, element, selected, onClick }) => {
     const getBreakPointID = (len) => {
