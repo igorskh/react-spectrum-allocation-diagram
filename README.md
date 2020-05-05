@@ -16,7 +16,7 @@ Figure 2 3GPP bands overview for a selected block
 
 ![measurement result](screenshots/measurement.png)
 
-Figure 2 Live measurement snapshot
+Figure 3 Live measurement snapshot
 
 ## Build and run
 
