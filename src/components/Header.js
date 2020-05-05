@@ -3,11 +3,14 @@ import React from "react";
 import {
     NavLink
 } from "react-router-dom";
-import { Container, Navbar, Nav } from "react-bootstrap";
+import { Navbar, Nav } from "react-bootstrap";
 
 function Header() {
-    return <Navbar bg="dark" variant="dark">
-        <Container fluid>
+    return <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
+
+        <NavLink
+            exact
+            activeStyle={{ color: "white" }} to="/">
             <Navbar.Brand>
                 <img
                     src="/logo.png"
@@ -18,25 +21,26 @@ function Header() {
                 />
                 Spectrum Diagram
             </Navbar.Brand>
+        </NavLink>
 
-            <Navbar.Collapse id="responsive-navbar-nav">
-                <Nav className="mr-auto">
-                    <NavLink
-                        exact
-                        activeStyle={{ color: "white" }}
-                        className="nav-link" to="/">
-                        Allocation
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="mr-auto">
+                <NavLink
+                    exact
+                    activeStyle={{ color: "white" }}
+                    className="nav-link" to="/">
+                    Allocation
+                </NavLink>
+                <NavLink
+                    exact
+                    activeStyle={{ color: "white" }}
+                    className="nav-link"
+                    to="/map">
+                    Measurement
                     </NavLink>
-                    <NavLink
-                        exact
-                        activeStyle={{ color: "white" }}
-                        className="nav-link"
-                        to="/map">
-                        Measurement
-                    </NavLink>
-                </Nav>
-            </Navbar.Collapse>
-        </Container>
+            </Nav>
+        </Navbar.Collapse>
     </Navbar>;
 
 }
