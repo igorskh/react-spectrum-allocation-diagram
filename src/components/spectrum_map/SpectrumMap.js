@@ -20,7 +20,9 @@ function SpectrumMap({
     onScroll,
     scrollValue,
     span,
-    minimapPath
+    minimapPath,
+    sweepTime,
+    freqRes
 }) {
     const canvas = useRef();
     const [currentImg, setCurrentImg] = useState([0, 0.0, 0.0]);
@@ -97,7 +99,10 @@ function SpectrumMap({
                 <SpectrumMapParams
                     imgSize={imgSize}
                     params={params}
-                    span={span} />
+                    span={span} 
+                    freqRes={freqRes} 
+                    sweepTime={sweepTime} 
+                    />
             }
             <div
                 style={{

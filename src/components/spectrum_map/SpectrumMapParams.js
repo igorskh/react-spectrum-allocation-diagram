@@ -1,6 +1,8 @@
 import React from "react";
 
-function SpectrumMapParams({ imgSize, span, params }) {
+function SpectrumMapParams({ 
+    imgSize, span, params, freqRes, sweepTime 
+}) {
     if (!imgSize && !params && !span) {
         return <></>;
     }
@@ -22,6 +24,13 @@ function SpectrumMapParams({ imgSize, span, params }) {
                 </span>
                 <span>
                     Stop {params.stop} MHz
+                </span>
+                <span>
+                    Resolution {freqRes} kHz
+                </span>
+                <br/>
+                <span>
+                    Sweep Time {sweepTime} ms
                 </span>
             </div>
         </div>

@@ -3,7 +3,10 @@ import React, { useState } from "react";
 import SpectrumMap from "../components/spectrum_map/SpectrumMap";
 import spectrumMap from "../data/spectrum_map.json";
 
-import { DEFAULT_SPAN, BUCKET_PATH } from "../config";
+import {
+    DEFAULT_SPAN, BUCKET_PATH,
+    DEFAULT_SWEEP_TIME_MS, DEFAULT_FREQ_RES_KHZ
+} from "../config";
 
 function SpectrumMapPage() {
     const [scrollValue, setScrollValue] = useState();
@@ -15,7 +18,9 @@ function SpectrumMapPage() {
             spectrumMap,
             minimapPath: BUCKET_PATH + "/vert900/minimap.png",
             path: BUCKET_PATH + "/vert900/waterfall",
-            onScroll: true
+            onScroll: true,
+            sweepTime: DEFAULT_SWEEP_TIME_MS,
+            freqRes: DEFAULT_FREQ_RES_KHZ
         },
         {
             title: "Antenna VERT2450",
@@ -24,7 +29,9 @@ function SpectrumMapPage() {
             spectrumMap,
             minimapPath: BUCKET_PATH + "/vert2450/minimap.png",
             path: BUCKET_PATH + "/vert2450/waterfall",
-            scrollValue: true
+            scrollValue: true,
+            sweepTime: DEFAULT_SWEEP_TIME_MS,
+            freqRes: DEFAULT_FREQ_RES_KHZ
         }
     ];
 
@@ -41,6 +48,8 @@ function SpectrumMapPage() {
                 spectrumMap={e.spectrumMap}
                 minimapPath={e.minimapPath}
                 path={e.path}
+                sweepTime={e.sweepTime}
+                freqRes={e.freqRes}
             />;
         })}
     </>;
