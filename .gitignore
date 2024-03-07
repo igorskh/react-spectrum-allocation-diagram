@@ -24,3 +24,7 @@ yarn-error.log*
 
 # testing
 public/spectrum_map
+
+# python
+venv
+.env
